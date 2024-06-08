@@ -25,5 +25,24 @@
 </head>
 <body>
     <textarea id="textarea" placeholder=""></textarea>
+    <script>
+        const textarea = document.getElementById('textarea');
+        const insertTabCharacter = () => {
+            const { value, selectionStart, selectionEnd } = textarea;
+        
+            // Insert tab character
+            textarea.value = `${value.substring(0, selectionEnd)}\t${value.substring(selectionEnd)}`;
+        
+            // Move cursor to new position
+            textarea.selectionStart = textarea.selectionEnd = selectionEnd + 1;
+        };
+        
+        textarea.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                insertTabCharacter();
+            }
+        });
+    </script>
 </body>
 </html>
